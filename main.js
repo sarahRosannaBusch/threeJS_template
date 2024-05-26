@@ -2,14 +2,15 @@
  * @filename    main.js
  * @brief       Things that every three.js projects needs
  * @author      Sarah Rosanna Busch
- * @version     0
- * @date        17 April 2024
+ * @version     0.1
+ * @date        26 April 2024
  */
 
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 let container, camera, renderer, scene, controls;
+let width, height; //container dimensions
 let tick = 0;
 
 init();
@@ -17,11 +18,11 @@ function init() {
     //dom elements and event listeners
     container = document.getElementById('container');
 
-    const width = container.clientWidth;
-    const height = container.clientHeight;
+    width = container.clientWidth;
+    height = container.clientHeight;
 
     // camera
-    camera = new THREE.PerspectiveCamera( 75, width / height, 0.1, 1000 );
+    camera = new THREE.PerspectiveCamera( 50, width / height, 0.1, 1000 );
     camera.position.z = 5;
 
     // renderer
@@ -83,8 +84,8 @@ function animate(time) { //ms
 //return true if the canvas resolution needs to change
 function resizeRendererToDisplaySize(renderer) {
     const canvas = renderer.domElement;
-    const width = canvas.clientWidth;
-    const height = canvas.clientHeight;
+    width = canvas.clientWidth;
+    height = canvas.clientHeight;
     const needResize = canvas.width !== width || canvas.height !== height;
     if (needResize) {
         renderer.setSize(width, height, false);
@@ -93,8 +94,8 @@ function resizeRendererToDisplaySize(renderer) {
 }
 
 function onWindowResize() {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
+    width = window.innerWidth;
+    height = window.innerHeight;
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     renderer.setSize( width, height );
